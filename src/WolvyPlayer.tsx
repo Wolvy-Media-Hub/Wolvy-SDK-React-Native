@@ -277,11 +277,11 @@ export const WolvyPlayer = forwardRef<WolvyPlayerHandle, WolvyPlayerProps>(
       [tag]
     );
 
-    if (Platform.OS !== 'android') {
+    if (Platform.OS !== 'android' && Platform.OS !== 'ios') {
       return (
         <View style={[styles.unsupported, style]} {...viewProps}>
           <Text style={styles.unsupportedText}>
-            The Wolvy player runs on Android in this version.
+            The Wolvy player runs on Android and iOS.
           </Text>
         </View>
       );

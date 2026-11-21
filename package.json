@@ -1,7 +1,7 @@
 {
   "name": "@wolvy/react-native",
-  "version": "0.1.0",
-  "description": "Plays Wolvy's DRM-protected video in React Native apps: Widevine, the viewer watermark, screen-capture protection and the web Player API's methods and events. Android now, iOS later.",
+  "version": "0.2.0",
+  "description": "Plays Wolvy's DRM-protected video in React Native apps: Widevine on Android, FairPlay on iOS, the viewer watermark, screen-capture protection and the web Player API's methods and events.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
   "exports": {
@@ -17,7 +17,9 @@
     "src",
     "lib",
     "android",
+    "ios",
     "react-native.config.js",
+    "*.podspec",
     "!android/build",
     "!android/gradle",
     "!android/gradlew",
@@ -26,7 +28,8 @@
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
-    "!**/.*"
+    "!**/.*",
+    "!ios/build"
   ],
   "scripts": {
     "example": "yarn workspace @wolvy/react-native-example",
@@ -111,6 +114,14 @@
     "jsSrcsDir": "src",
     "android": {
       "javaPackageName": "net.wolvy.player.reactnative"
+    },
+    "ios": {
+      "componentProvider": {
+        "WolvyPlayerView": "WolvyPlayerComponentView"
+      },
+      "modulesProvider": {
+        "WolvyPlayerModule": "WolvyPlayerModule"
+      }
     }
   },
   "prettier": {
