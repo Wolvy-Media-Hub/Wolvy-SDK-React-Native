@@ -1,6 +1,6 @@
 # Wolvy React Native SDK (`@wolvy/react-native`)
 
-**0.1.0, ready for npm (organisation `@wolvy`; not released yet).** Android only in this version; iOS comes with the iOS SDK. React Native 0.85 and the new architecture (a Fabric component and a TurboModule).
+**0.1.0.** Android only in this version; iOS comes with the iOS SDK. React Native 0.85 and the new architecture (a Fabric component and a TurboModule).
 
 Plays Wolvy's DRM-protected video in React Native apps with the viewer watermark, screen-capture protection and the account's quality rules, and the same methods and events as Wolvy's web Player API. Built on the [Wolvy Android SDK](https://github.com/Wolvy-Media-Hub/Wolvy-SDK-Android): this package holds no playback logic of its own.
 
@@ -9,13 +9,11 @@ Plays Wolvy's DRM-protected video in React Native apps with the viewer watermark
 
 ## Install
 
-Once released (not yet), with the Wolvy Android SDK on Maven Central:
-
 ```bash
 npm install @wolvy/react-native
 ```
 
-React Native 0.85 or later with the new architecture; `minSdkVersion` 24. Add your app's package name to Allowed apps.
+The Wolvy Android SDK (`net.wolvy:wolvy-player`) comes from Maven Central with it. React Native 0.85 or later with the new architecture; `minSdkVersion` 24. Add your app's package name to Allowed apps.
 
 ## Use
 
@@ -69,13 +67,13 @@ Errors are `WolvyError` with the web codes (`network_error`, `playback_error`, `
 
 ## Develop
 
-Until the Android SDK is on Maven Central, build it into your local Maven repository first and set `wolvy.useMavenLocal=true` in the app's `android/gradle.properties` (the example does):
+Run `yarn install`, `yarn lint`, `yarn typecheck`, `yarn test`, and `cd example/android && ./gradlew assembleRelease`. Add `net.wolvy.player.reactnative.example` to a test account's Allowed apps. `spike/` (on its own branch) is the phase 3 step 1 test app.
+
+To try changes to the Wolvy Android SDK, build it into your local Maven repository and set `wolvy.useMavenLocal=true` in the app's `android/gradle.properties`:
 
 ```bash
 git clone https://github.com/Wolvy-Media-Hub/Wolvy-SDK-Android && cd Wolvy-SDK-Android && ./gradlew :wolvy-player:publishToMavenLocal
 ```
-
-Then `yarn install`, `yarn lint`, `yarn typecheck`, `yarn test`, and `cd example/android && ./gradlew assembleRelease`. Add `net.wolvy.player.reactnative.example` to a test account's Allowed apps. `spike/` (on its own branch) is the phase 3 step 1 test app.
 
 ## Licence
 
