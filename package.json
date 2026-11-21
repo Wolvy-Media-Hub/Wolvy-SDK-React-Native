@@ -126,6 +126,5 @@
       "eslint"
     ],
     "version": "0.64.0"
-  },
-  "private": true
+  }
 }
