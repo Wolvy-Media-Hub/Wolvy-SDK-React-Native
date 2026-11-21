@@ -33,3 +33,29 @@ jobs:
       - name: Build the example
         working-directory: example/android
         run: ./gradlew --no-daemon assembleRelease -PreactNativeArchitectures=arm64-v8a
+
+  ios:
+    name: iOS module and the example (simulator)
+    runs-on: macos-latest
+    env:
+      LANG: en_US.UTF-8
+      LC_ALL: en_US.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+      - name: The Wolvy iOS SDK copy matches CORE_VERSION
+        run: |
+          commit=$(awk '{print $3}' ios/CORE_VERSION)
+          git clone --quiet https://github.com/Wolvy-Media-Hub/Wolvy-SDK-iOS /tmp/core
+          git -C /tmp/core checkout --quiet "$commit"
+          diff -r /tmp/core/Sources/WolvyPlayer ios/WolvyCore
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: yarn install --immutable
+      - name: Pods
+        working-directory: example/ios
+        run: pod install
+      - name: Build the example for the simulator
+        working-directory: example/ios
+        run: xcodebuild -workspace ReactNativeExample.xcworkspace -scheme ReactNativeExample -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -configuration Release CODE_SIGNING_ALLOWED=NO build
