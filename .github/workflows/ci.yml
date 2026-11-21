@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: Wolvy-Media-Hub/Wolvy-SDK-Android
-          ref: f51b6ba1f9e958fb42dbcefaff80d5b0af49f57e
+          ref: bb9e8f6ff81caa5b1f4ecdab474e00f3731e2d30
           path: android-core
       - uses: actions/setup-node@v4
         with:

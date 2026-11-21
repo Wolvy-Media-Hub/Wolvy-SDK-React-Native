@@ -52,6 +52,7 @@ Errors are `WolvyError` with the web codes (`network_error`, `playback_error`, `
 
 ## Good to know
 
+- **Keep `<WolvyPlayer>` mounted.** The native player lives in the component: if React unmounts it (for example, moving it into a `Modal` for fullscreen), playback starts again from the beginning. For fullscreen, change its style in place (the example shows how).
 - **The whole window is protected** from screenshots and recordings while the player is on screen (FLAG_SECURE).
 - **Quality** follows Wolvy's licence server: hardware DRM gets every quality, software DRM 480p and below, and nothing at all when the account has App-Only on.
 - **Fullscreen**: the player's button calls `onFullscreenChange`; your app resizes the view (the example shows how).
