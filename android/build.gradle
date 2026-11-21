@@ -34,7 +34,7 @@ android {
 repositories {
   google()
   mavenCentral()
-  // Only for developing against an unreleased Wolvy Android SDK (./gradlew :wolvy-player:publishToMavenLocal
+  // Only for developing against a local Wolvy Android SDK (./gradlew :wolvy-player:publishToMavenLocal
   // in Wolvy-SDK-Android): set wolvy.useMavenLocal=true in the app's android/gradle.properties. Off by default.
   if (project.findProperty("wolvy.useMavenLocal") == "true") mavenLocal()
 }

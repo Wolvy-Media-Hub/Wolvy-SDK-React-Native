@@ -22,7 +22,7 @@ apply plugin: "com.facebook.react.rootproject"
 
 allprojects {
     repositories {
-        // The Wolvy Android SDK from publishToMavenLocal while it is unreleased (gradle.properties).
+        // A local Wolvy Android SDK (publishToMavenLocal) only with wolvy.useMavenLocal=true (gradle.properties).
         if (project.findProperty("wolvy.useMavenLocal") == "true") mavenLocal()
     }
 }
