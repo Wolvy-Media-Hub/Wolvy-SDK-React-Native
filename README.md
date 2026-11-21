@@ -1,6 +1,6 @@
 # Wolvy React Native SDK (`@wolvy/react-native`)
 
-**0.2.0.** Android and iOS. React Native 0.85 and the new architecture (a Fabric component and a TurboModule).
+**0.3.0.** Android and iOS. React Native 0.85 and the new architecture (a Fabric component and a TurboModule).
 
 Plays Wolvy's DRM-protected video in React Native apps with the viewer watermark, screen-capture protection and the account's quality rules, and the same methods and events as Wolvy's web Player API. Built on the [Wolvy Android SDK](https://github.com/Wolvy-Media-Hub/Wolvy-SDK-Android) (Widevine) and the [Wolvy iOS SDK](https://github.com/Wolvy-Media-Hub/Wolvy-SDK-iOS) (FairPlay): this package holds no playback logic of its own, and the same JavaScript runs on both.
 
@@ -67,6 +67,11 @@ Errors are `WolvyError` with the web codes (`network_error`, `playback_error`, `
 - **Screen capture.** Android: the whole window is protected from screenshots and recordings while the player is on screen (FLAG_SECURE). iOS: iOS keeps the FairPlay picture out of screenshots, recordings and mirroring by itself (the picture is black there).
 - **Quality.** Android follows Wolvy's licence server: hardware DRM gets every quality, software DRM 480p and below, and nothing at all when the account has App-Only on. iOS has hardware DRM on every device; `setQuality` sets a ceiling there (AVPlayer adapts below it). FairPlay needs a real iPhone or iPad: the simulator shows the steps up to the licence only.
 - **Fullscreen**: the player's button calls `onFullscreenChange`; your app resizes the view (the example shows how).
+- **App protection.** Set it up once per app in the dashboard (Settings → Protection → Allowed apps → Protection):
+  - **Android:** the app signing key's SHA-256 and your own Play Integrity keys;
+  - **iOS:** your Apple team id.
+
+  The app then proves it is genuine before playback, and plays like Wolvy Player (with App-Only on, also on Android phones without hardware DRM). Only your published app is proven: sideloaded or re-signed copies, rooted phones and emulators are refused. There's nothing to code. `state.attested` says whether it applies.
 
 ## Develop
 

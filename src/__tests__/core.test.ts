@@ -137,3 +137,19 @@ test('codes and speeds match the web Player API', () => {
   );
   assert.deepEqual([...WOLVY_PLAYBACK_RATES], [0.5, 0.75, 1, 1.25, 1.5, 2]);
 });
+
+test('the ready state carries attested (app protection)', () => {
+  const proven = parseEvent(
+    'ready',
+    '{"currentTime":0,"duration":81.5,"paused":true,"muted":false,"volume":1,"playbackRate":1,"attested":true}'
+  );
+  assert.equal(proven?.name, 'ready');
+  assert.equal(proven?.name === 'ready' && proven.state.attested, true);
+  assert.equal(proven?.name === 'ready' && proven.state.duration, 81.5);
+  // An older native side sends no attested: false, never undefined.
+  const older = parseEvent(
+    'ready',
+    '{"currentTime":0,"duration":10,"paused":true,"muted":false,"volume":1,"playbackRate":1}'
+  );
+  assert.equal(older?.name === 'ready' && older.state.attested, false);
+});

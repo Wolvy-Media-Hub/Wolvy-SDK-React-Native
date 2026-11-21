@@ -78,6 +78,23 @@ export interface WolvyState {
   muted: boolean;
   volume: number;
   playbackRate: number;
+  /** The app proved itself to Wolvy for this video (app protection): it plays like Wolvy Player. */
+  attested: boolean;
+}
+
+/** A state from the native side (an older one sends no attested). */
+export function toState(d: Record<string, unknown>): WolvyState {
+  const n = (v: unknown, fallback = 0) =>
+    typeof v === 'number' && Number.isFinite(v) ? v : fallback;
+  return {
+    currentTime: n(d.currentTime),
+    duration: n(d.duration),
+    paused: d.paused === true,
+    muted: d.muted === true,
+    volume: n(d.volume, 1),
+    playbackRate: n(d.playbackRate, 1),
+    attested: d.attested === true,
+  };
 }
 /** selected: the picked height, or null for automatic; playing: the height on screen. */
 export interface WolvyQualities {
@@ -138,7 +155,7 @@ export function parseEvent(name: string, json: string): WolvyEvent | null {
   }
   switch (name) {
     case 'ready':
-      return { name, state: d as unknown as WolvyState };
+      return { name, state: toState(d) };
     case 'play':
     case 'pause':
     case 'seeked':

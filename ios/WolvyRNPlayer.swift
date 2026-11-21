@@ -9,7 +9,7 @@ import UIKit
 @MainActor
 public final class WolvyRNPlayer: UIView, WolvyPlayerListener {
     /// This package's version, sent to Wolvy in X-Wolvy-SDK.
-    static let version = "0.2.0"
+    static let version = "0.3.0"
 
     private static let registry = NSMapTable<NSNumber, WolvyRNPlayer>.strongToWeakObjects()
 
@@ -192,7 +192,7 @@ public final class WolvyRNPlayer: UIView, WolvyPlayerListener {
 
     static func map(_ s: WolvyState) -> [String: Any] {
         ["currentTime": s.currentTime, "duration": s.duration, "paused": s.paused,
-         "muted": s.muted, "volume": Double(s.volume), "playbackRate": Double(s.playbackRate)]
+         "muted": s.muted, "volume": Double(s.volume), "playbackRate": Double(s.playbackRate), "attested": s.attested]
     }
 
     static func map(_ q: WolvyQualities) -> [String: Any] {

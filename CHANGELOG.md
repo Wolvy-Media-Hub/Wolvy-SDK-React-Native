@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+- **App protection**, from the Wolvy Android SDK 0.2.0 and iOS SDK 0.2.0. When the account sets up protection for the app (dashboard: Settings → Protection → Allowed apps → Protection), the app proves it is genuine before playback: on Android with the customer's own Google Play Integrity, on iOS with Apple's App Attest. A proven app signs its requests and plays like Wolvy Player. Without the setup, or when the proof fails, it plays as before, unless the account only allows proven apps. There's nothing to code.
+- `WolvyState.attested` (in `onReady` and `getState()`). New error reasons: `attestation_required`, `device_compromised` (Android, `device_not_supported`), `app_not_genuine`, `attestation_failed`.
+- iOS core copy: Wolvy-SDK-iOS 0.2.0 (`ios/CORE_VERSION`).
+
 ## 0.2.0
 
 - **iOS**: the same JavaScript API on the Wolvy iOS SDK 0.1.0 (AVPlayer and FairPlay): a Fabric view and a TurboModule in Objective-C++ over a Swift player. iOS 15.1 or later, CocoaPods.
