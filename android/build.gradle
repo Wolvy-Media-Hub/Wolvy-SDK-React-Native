@@ -1,0 +1,44 @@
+ext.ReactNative = [
+  minSdkVersion: 24,
+  compileSdkVersion: 36
+]
+
+ext.getExtOrDefault = { prop ->
+  if (rootProject.ext.has(prop)) {
+    return rootProject.ext.get(prop)
+  }
+
+  return ReactNative[prop]
+}
+
+
+apply plugin: "com.android.library"
+
+if (project.extensions.findByName("kotlin") == null) {
+  apply plugin: "kotlin-android"
+}
+
+
+apply plugin: "com.facebook.react"
+
+android {
+  namespace "net.wolvy.player.reactnative"
+
+  compileSdkVersion getExtOrDefault("compileSdkVersion")
+
+  defaultConfig {
+    minSdkVersion getExtOrDefault("minSdkVersion")
+  }
+}
+
+repositories {
+  google()
+  mavenCentral()
+  // The Wolvy Android SDK until it is on Maven Central (publishToMavenLocal in Wolvy-SDK-Android).
+  mavenLocal()
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "net.wolvy:wolvy-player:0.1.0"
+}

@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Lint, types, tests, package and the example (Android)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The Wolvy Android SDK is not on Maven Central yet: build it into mavenLocal from a pinned commit.
+      - uses: actions/checkout@v4
+        with:
+          repository: Wolvy-Media-Hub/Wolvy-SDK-Android
+          ref: bb9e8f6ff81caa5b1f4ecdab474e00f3731e2d30
+          path: android-core
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn lint
+      - run: yarn typecheck
+      - run: yarn test
+      - run: yarn prepare
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Android SDK 36 and NDK 27.1
+        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;27.1.12297006"
+      - name: Wolvy Android SDK into mavenLocal
+        working-directory: android-core
+        run: ./gradlew --no-daemon :wolvy-player:publishToMavenLocal
+      - name: Build the example
+        working-directory: example/android
+        run: ./gradlew --no-daemon assembleRelease -PreactNativeArchitectures=arm64-v8a
