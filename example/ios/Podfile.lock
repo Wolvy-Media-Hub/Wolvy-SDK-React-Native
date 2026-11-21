@@ -1787,7 +1787,7 @@ PODS:
     - React-utils (= 0.85.3)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.85.3)
-  - WolvyReactNative (0.2.0):
+  - WolvyReactNative (0.3.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2116,7 +2116,7 @@ SPEC CHECKSUMS:
   ReactCodegen: c8f81e6c6f762dcf442a6203a1fb58f7dafc8014
   ReactCommon: 7dfc3250793bf36cf221096ff59e1179e13eef7f
   ReactNativeDependencies: 69002940235a326578a5e0c2bf482ea9a7e9a11f
-  WolvyReactNative: 972aa843bef5dbda25f7c2fc24d0fc785155cf53
+  WolvyReactNative: 7ffaea1c6fd31b9106efb50762fc1f2c843a2477
   Yoga: 77dfa8673de2874e1855002ae59c68b8be9b007b
 
 PODFILE CHECKSUM: e48b44bd5fb8c72d88d9c8a533c21cefdd9d7325

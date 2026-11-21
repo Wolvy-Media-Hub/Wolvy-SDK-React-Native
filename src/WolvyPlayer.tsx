@@ -19,6 +19,7 @@ import NativeView from './WolvyPlayerViewNativeComponent';
 import {
   checkVideo,
   parseEvent,
+  toState,
   toWolvyError,
   WolvyError,
   type WolvyCaptions,
@@ -154,7 +155,7 @@ export const WolvyPlayer = forwardRef<WolvyPlayerHandle, WolvyPlayerProps>(
         setCaptions: (l) => call((t) => NativeModule.setCaptions(t, l ?? '')),
         retry: () => call((t) => NativeModule.retry(t)),
         getState: async () =>
-          JSON.parse(await call((t) => NativeModule.getState(t))) as WolvyState,
+          toState(JSON.parse(await call((t) => NativeModule.getState(t)))),
         getQualities: async () =>
           JSON.parse(
             await call((t) => NativeModule.getQualities(t))

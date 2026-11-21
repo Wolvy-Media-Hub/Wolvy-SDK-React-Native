@@ -1,6 +1,6 @@
 {
   "name": "@wolvy/react-native",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Plays Wolvy's DRM-protected video in React Native apps: Widevine on Android, FairPlay on iOS, the viewer watermark, screen-capture protection and the web Player API's methods and events.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

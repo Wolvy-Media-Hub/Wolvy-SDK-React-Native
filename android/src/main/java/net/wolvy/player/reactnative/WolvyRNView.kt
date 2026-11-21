@@ -34,7 +34,8 @@ class WolvyRNView(private val reactContext: ThemedReactContext) : FrameLayout(re
     private val main = Handler(Looper.getMainLooper())
     val player = WolvyPlayer(
         reactContext,
-        AppRenderVideoSource(reactContext.packageName, "wolvy-react-native/$VERSION+android.${CoreBuildConfig.SDK_VERSION}"),
+        // Built from the context, so the app proves itself (app protection) when the account set it up.
+        AppRenderVideoSource(reactContext, "wolvy-react-native/$VERSION+android.${CoreBuildConfig.SDK_VERSION}"),
     )
     // The activity, when known: the view sets FLAG_SECURE on its window.
     private val playerView = WolvyPlayerView(reactContext.currentActivity ?: reactContext).also { it.player = player }
@@ -136,7 +137,7 @@ class WolvyRNView(private val reactContext: ThemedReactContext) : FrameLayout(re
     }
 
     companion object {
-        const val VERSION = "0.2.0"
+        const val VERSION = "0.3.0"
     }
 }
 
@@ -149,6 +150,7 @@ internal class WolvyRNEvent(surfaceId: Int, viewTag: Int, private val name: Stri
 internal fun State.json(): JSONObject = JSONObject()
     .put("currentTime", currentTime).put("duration", duration).put("paused", paused)
     .put("muted", muted).put("volume", volume.toDouble()).put("playbackRate", playbackRate.toDouble())
+    .put("attested", attested)
 
 internal fun Qualities.json(): JSONObject = JSONObject()
     .put("available", JSONArray(available)).put("selected", selected ?: JSONObject.NULL).put("playing", playing ?: JSONObject.NULL)
