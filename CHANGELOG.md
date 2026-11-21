@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+- **iOS**: the same JavaScript API on the Wolvy iOS SDK 0.1.0 (AVPlayer and FairPlay): a Fabric view and a TurboModule in Objective-C++ over a Swift player. iOS 15.1 or later, CocoaPods.
+- The Wolvy iOS SDK's sources are carried in the package (`ios/CORE_VERSION`), since CocoaPods trunk takes no new pods.
+- `setQuality` on iOS sets a ceiling; captions, chapters, the watermark, fullscreen and the token provider work as on Android.
+- The example app has an iOS app (UIScene life cycle, required by the iOS 27 SDK).
+
 ## 0.1.0
 
 First release of `@wolvy/react-native`.
